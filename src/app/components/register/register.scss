@@ -1,0 +1,6 @@
+.register-shell { display:flex; justify-content:center; padding:48px 16px; }
+.reg-card { width:100%; max-width:520px; }
+form.reg-form { display:flex; flex-direction:column; gap:18px; }
+.actions-row { display:flex; gap:14px; }
+.error-line { color:var(--mat-warn); font-size:13px; }
+.lock-line { color:var(--mat-accent); font-size:13px; }

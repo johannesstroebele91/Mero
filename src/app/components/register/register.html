@@ -1,0 +1,30 @@
+<div class="register-shell">
+  <mat-card class="reg-card" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+      <mat-card-subtitle>Create your access</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()" class="reg-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" required autocomplete="email" />
+          @if (form.get('email')?.invalid) { <mat-error>Valid email required</mat-error> }
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="showPass ? 'text' : 'password'" formControlName="password" required autocomplete="new-password" />
+          <button mat-icon-button matSuffix type="button" (click)="togglePass()" [attr.aria-label]="showPass ? 'Hide password' : 'Show password'">
+            <mat-icon>{{ showPass ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if (form.get('password')?.invalid) { <mat-error>Min 6 chars</mat-error> }
+        </mat-form-field>
+        @if (auth.error()) { <div class="error-line">{{ auth.error() }}</div> }
+        <div class="actions-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || auth.loading()">Register</button>
+          <button mat-button color="accent" type="button" (click)="back()">Back</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
