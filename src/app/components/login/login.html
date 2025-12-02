@@ -1,0 +1,81 @@
+@if (!authService.authReady()) {
+  <div class="preload">Initialisiere…</div>
+}
+@if (authService.authReady()) {
+    <section class="auth-section" aria-label="Authentication Options">
+      <h1 id="featuresTitle" class="section-title">Login methods</h1>
+      @if (authService.userSignal() == null) {
+        <div class="auth-cards">
+          <!-- Email Login Card -->
+          <mat-card class="auth-card" appearance="outlined">
+            <mat-card-header>
+              <div class="auth-card-header">
+                <div class="auth-card-header-left">
+                  <mat-card-title>Email Login</mat-card-title>
+                  <mat-card-subtitle class="auth-card-header-subtitle">Enter credentials</mat-card-subtitle>
+                </div>
+                <div class="actions-row">
+                  <button mat-raised-button matButton="filled" color="primary" type="submit" [disabled]="loginForm.invalid || authService.loading()">Login</button>
+                </div>
+              </div>
+            </mat-card-header>
+            <mat-card-content>
+              <form [formGroup]="loginForm" (ngSubmit)="submitEmailLogin()" class="form-col">
+                <mat-form-field appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input matInput formControlName="email" type="email" autocomplete="email" required />
+                  @if (loginForm.get('email')?.invalid) { <mat-error>Valid email required</mat-error> }
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password" autocomplete="current-password" required />
+                  <button mat-icon-button matSuffix type="button" (click)="togglePassword()" [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
+                    <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                  </button>
+                  @if (loginForm.get('password')?.invalid) { <mat-error>Min 6 chars</mat-error> }
+                </mat-form-field>
+                @if (authService.error()) { <div class="error-line">{{ authService.error() }}</div> }
+              </form>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Google Card -->
+          <mat-card class="auth-card" appearance="outlined">
+            <mat-card-header>
+              <div class="auth-card-header-left">
+                <mat-card-title>Google Login</mat-card-title>
+                <mat-card-subtitle class="auth-card-header-subtitle">Fast secure entry</mat-card-subtitle>
+              </div>
+            </mat-card-header>
+            <mat-card-content>
+              <button mat-raised-button matButton="filled" color="primary" (click)="loginGoogle()" [disabled]="authService.loading()"> <mat-icon>login</mat-icon> Sign in with Google </button>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Register Card Link -->
+          <mat-card class="auth-card" appearance="outlined">
+            <mat-card-header>
+              <div class="auth-card-header-left">
+                <mat-card-title>Create Account</mat-card-title>
+                <mat-card-subtitle class="auth-card-header-subtitle">Create an account</mat-card-subtitle>
+              </div>
+            </mat-card-header>
+            <mat-card-content>
+              <button mat-raised-button matButton="filled" color="accent" routerLink="/register"> <mat-icon>person_add</mat-icon> Register </button>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      }
+      @if (authService.userSignal() != null) {
+      <div class="auth-cards">
+        <mat-card class="auth-card" appearance="outlined">
+          <mat-card-content class="signed-box">
+            <mat-icon color="primary">verified_user</mat-icon>
+            <div class="signed-text">Session active. Proceed to your Home.</div>
+            <button mat-raised-button color="accent" (click)="goDashboard()">Enter Home</button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      }
+    </section>
+}
