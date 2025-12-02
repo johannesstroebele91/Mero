@@ -1,0 +1,27 @@
+
+.toolbar {
+  background: midnightblue;
+  color: white;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+  width: 100%;
+}
+
+.auth-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logout-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logout-btn mat-icon {
+  font-size: 18px;
+}

@@ -1,0 +1,17 @@
+<mat-toolbar color="primary" class="toolbar">
+    <div class="left-cluster">
+      <div class="title-section">
+        <div class="title-text">
+          <h1 class="app-logo-title">Mero</h1>
+        </div>
+      </div>
+    </div>
+    @if (!isLoginRoute() && (auth.authState$ | async) != null) {
+      <div class="auth-actions">
+        <button mat-raised-button color="accent" (click)="onLogout()" class="logout-btn">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </div>
+    }
+</mat-toolbar>
