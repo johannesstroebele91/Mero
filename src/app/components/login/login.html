@@ -7,7 +7,8 @@
       @if (authService.userSignal() == null) {
         <div class="auth-cards">
           <!-- Email Login Card -->
-          <mat-card class="auth-card" appearance="outlined">
+          <form [formGroup]="loginForm" (ngSubmit)="submitEmailLogin()">
+            <mat-card  class="auth-card" appearance="outlined">
             <mat-card-header>
               <div class="auth-card-header">
                 <div class="auth-card-header-left">
@@ -20,7 +21,7 @@
               </div>
             </mat-card-header>
             <mat-card-content>
-              <form [formGroup]="loginForm" (ngSubmit)="submitEmailLogin()" class="form-col">
+              <div class="form-col">
                 <mat-form-field appearance="outline">
                   <mat-label>Email</mat-label>
                   <input matInput formControlName="email" type="email" autocomplete="email" required />
@@ -35,9 +36,10 @@
                   @if (loginForm.get('password')?.invalid) { <mat-error>Min 6 chars</mat-error> }
                 </mat-form-field>
                 @if (authService.error()) { <div class="error-line">{{ authService.error() }}</div> }
-              </form>
+              </div>
             </mat-card-content>
           </mat-card>
+          </form>
 
           <!-- Google Card -->
           <mat-card class="auth-card" appearance="outlined">

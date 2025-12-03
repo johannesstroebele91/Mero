@@ -5,7 +5,7 @@
 .auth-card-header {display: flex; justify-content: space-between; gap:10px; width: 100% }
 .auth-card-header-left {display: flex; flex-direction: column; gap:8px; margin-bottom: 12px; }
 .auth-card-header-subtitle {font-weight: 400; opacity: 0.9; margin-left: 4px}
-form.form-col { display:flex; flex-direction:column; gap:12px; }
+.form-col { display:flex; flex-direction:column; gap:12px; }
 .actions-row { display:flex; gap:12px; flex-wrap:wrap; }
 .error-line { color:var(--mat-warn); font-size:13px; }
 .lock-line { color:var(--mat-accent); font-size:13px; }
